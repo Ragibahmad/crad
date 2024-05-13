@@ -1,0 +1,36 @@
+<header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="../assets/img/logo.png" alt=""> -->
+        <h1 class="">CRAD</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'home' %}" class="">Home</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'components' %} ">Components</a></li>
+          
+          {% if request.user.is_superuser %}
+          <li><a href="{% url 'component_add' %} ">Add Component</a></li>
+          {% endif %}
+          
+          <li><a href="{% url 'contact' %} ">Contact</a></li> 
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      
+      {% if request.user.is_superuser %}
+      <a class="btn-getstarted" href="{% url 'admin:index' %}">Dashboard</a>
+      {% else %}
+      <a class="btn-getstarted" href="{% url 'components' %}">Get Started</a>
+      {% endif %}
+    </div>
+  </header>
